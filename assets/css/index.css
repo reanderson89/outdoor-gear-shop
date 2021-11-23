@@ -1,0 +1,11 @@
+html {
+    position:relative;
+    background-image: url("../images/bachelorInBack.jpg");
+    background-size: cover;
+}
+
+#maintxt {
+    position: absolute;
+    color: whitesmoke;
+}
+
