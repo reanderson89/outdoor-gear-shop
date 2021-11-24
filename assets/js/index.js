@@ -1,10 +1,12 @@
 // new gearManager
-const gearManager = new GearController(0);
+const gearManager = new GearController();
 
 // DOM variables
 let gearList = document.getElementById("gearList");
 let gearRows = document.getElementById("gearRows");
 let addGearButton = document.getElementById("addGearButton");
+
+gearManager.loadLocalStorage();
 
 
 
@@ -41,20 +43,19 @@ const getGear = () => {
 // }
 
 // will be used when data persists
-// const createGearList = () => {
-//     let gear = gearManager.gear;
+const createGearList = (gear) => {
+    for (let i = 0; i < gear.length; i++){
+        let newRow = document.createElement("tr")
+        newRow.innerHTML = `<tr>
+        <th scope="row"><img class="img-thumbnail" src="${gear[i].picUrl}"></th>
+        <td>${gear[i].name}</td>
+        <td>${gear[i].usedFor}</td>
+        <td>${gear[i].price}</td>
+      </tr>`;
+      gearRows.append(newRow);
+    }
+}
 
-//     for (let i = 0; i < gear.length; i++){
-//         let newRow = document.createElement("tr")
-//         newRow.innerHTML = `<tr>
-//         <th scope="row"><img class="img-thumbnail" src="${gear[i].picUrl}"></th>
-//         <td>${gear[i].name}</td>
-//         <td>${gear[i].usedFor}</td>
-//         <td>${gear[i].price}</td>
-//       </tr>`;
-//       gearRows.append(newRow);
-//     }
-// }
 const addItemToGearList = (gear) => {
     console.log(gear);
         let newRow = document.createElement("tr")
@@ -64,12 +65,21 @@ const addItemToGearList = (gear) => {
         <td>${gear.usedFor}</td>
         <td>${gear.price}</td>
       </tr>`;
-      gearRows.append(newRow);
-    
+      gearRows.append(newRow); 
 }
 
 // uncomment the function call below to run the API and populate the list of gear... It is currently a list of people because I am using a jsonPlaceHolder API
 // getGear();
+
+const loadLocalStorage = () => {
+    if (localStorage.getItem("gear")){
+        console.log("gear exists");
+        let gear = JSON.parse(localStorage.getItem("gear"));
+        createGearList(gear);
+    } else {
+        console.log("no gear")
+    }
+}
 
 addGearButton.addEventListener("click", function(event){
     event.preventDefault();
@@ -92,6 +102,7 @@ addGearButton.addEventListener("click", function(event){
     gearUsedFor = '';
 })
 
+loadLocalStorage();
 
 
 
