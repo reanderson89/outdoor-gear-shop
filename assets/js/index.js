@@ -1,6 +1,11 @@
+// new gearManager
+const gearManager = new GearController(0);
+
 // DOM variables
 let gearList = document.getElementById("gearList");
 let gearRows = document.getElementById("gearRows");
+let addGearButton = document.getElementById("addGearButton");
+
 
 
 // API call to json placeholder. Will create items using this placeholder then switch out for database later.
@@ -36,6 +41,18 @@ const createGearList = (json) => {
 
 // uncomment the function call below to run the API and populate the list of gear... It is currently a list of people because I am using a jsonPlaceHolder API
 // getGear();
+
+addGearButton.addEventListener("click", function(event){
+    event.preventDefault();
+    let gearURL = document.getElementById("gearURL");
+    let gearType = document.getElementById("gearType");
+    let gearPrice = document.getElementById("gearPrice");
+    let gearUsedFor = document.getElementById("gearUsedFor");
+
+    gearManager.addGear(gearURL.value, gearType.value, gearUsedFor.value, gearPrice.value);
+})
+
+
 
 
 
