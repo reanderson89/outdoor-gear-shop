@@ -4,8 +4,10 @@ html {
     background-size: cover;
 }
 
-#maintxt {
+.maintxt {
     position: absolute;
     color: whitesmoke;
 }
+
+
 
