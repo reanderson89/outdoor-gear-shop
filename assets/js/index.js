@@ -23,20 +23,49 @@ const getGear = () => {
     })
 }
 
-const createGearList = (json) => {
-    let gear = json;
-    console.log(gear)
+// function for api call
+// const createGearList = (json) => {
+//     let gear = json;
+//     console.log(gear)
 
-    for (let i = 0; i < gear.length; i++){
+//     for (let i = 0; i < gear.length; i++){
+//         let newRow = document.createElement("tr")
+//         newRow.innerHTML = `<tr>
+//         <th scope="row">${gear[i].username}</th>
+//         <td>${gear[i].name}</td>
+//         <td>${gear[i].email}</td>
+//         <td>${gear[i].id}</td>
+//       </tr>`;
+//       gearRows.append(newRow);
+//     }
+// }
+
+// will be used when data persists
+// const createGearList = () => {
+//     let gear = gearManager.gear;
+
+//     for (let i = 0; i < gear.length; i++){
+//         let newRow = document.createElement("tr")
+//         newRow.innerHTML = `<tr>
+//         <th scope="row"><img class="img-thumbnail" src="${gear[i].picUrl}"></th>
+//         <td>${gear[i].name}</td>
+//         <td>${gear[i].usedFor}</td>
+//         <td>${gear[i].price}</td>
+//       </tr>`;
+//       gearRows.append(newRow);
+//     }
+// }
+const addItemToGearList = (gear) => {
+    console.log(gear);
         let newRow = document.createElement("tr")
         newRow.innerHTML = `<tr>
-        <th scope="row">${gear[i].username}</th>
-        <td>${gear[i].name}</td>
-        <td>${gear[i].email}</td>
-        <td>${gear[i].id}</td>
+        <th scope="row"><img class="img-thumbnail" src="${gear.picUrl}"></th>
+        <td>${gear.name}</td>
+        <td>${gear.usedFor}</td>
+        <td>${gear.price}</td>
       </tr>`;
       gearRows.append(newRow);
-    }
+    
 }
 
 // uncomment the function call below to run the API and populate the list of gear... It is currently a list of people because I am using a jsonPlaceHolder API
@@ -50,6 +79,17 @@ addGearButton.addEventListener("click", function(event){
     let gearUsedFor = document.getElementById("gearUsedFor");
 
     gearManager.addGear(gearURL.value, gearType.value, gearUsedFor.value, gearPrice.value);
+    addItemToGearList({
+        picUrl: gearURL.value,
+        name: gearType.value,
+        usedFor: gearUsedFor.value,
+        price: gearPrice.value
+    });
+
+    gearURL = '';
+    gearType = '';
+    gearPrice = '';
+    gearUsedFor = '';
 })
 
 
