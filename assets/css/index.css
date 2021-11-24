@@ -9,5 +9,10 @@ html {
     color: whitesmoke;
 }
 
+.img-thumbnail{
+    height: 100px;
+    width: 100px;
+}
+
 
 

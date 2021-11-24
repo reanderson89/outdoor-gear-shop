@@ -1,0 +1,109 @@
+// new gearManager
+const gearManager = new GearController(0);
+
+// DOM variables
+let gearList = document.getElementById("gearList");
+let gearRows = document.getElementById("gearRows");
+let addGearButton = document.getElementById("addGearButton");
+
+
+
+// API call to json placeholder. Will create items using this placeholder then switch out for database later.
+const getGear = () => {
+    fetch("https://jsonplaceholder.typicode.com/users")
+    .then(response => {
+        if(response.status === 200){
+            return response.json();
+        } else {
+            console.error(response)
+        }
+    }).then(json => {
+        createGearList(json)
+        return json;
+    })
+}
+
+// function for api call
+// const createGearList = (json) => {
+//     let gear = json;
+//     console.log(gear)
+
+//     for (let i = 0; i < gear.length; i++){
+//         let newRow = document.createElement("tr")
+//         newRow.innerHTML = `<tr>
+//         <th scope="row">${gear[i].username}</th>
+//         <td>${gear[i].name}</td>
+//         <td>${gear[i].email}</td>
+//         <td>${gear[i].id}</td>
+//       </tr>`;
+//       gearRows.append(newRow);
+//     }
+// }
+
+// will be used when data persists
+// const createGearList = () => {
+//     let gear = gearManager.gear;
+
+//     for (let i = 0; i < gear.length; i++){
+//         let newRow = document.createElement("tr")
+//         newRow.innerHTML = `<tr>
+//         <th scope="row"><img class="img-thumbnail" src="${gear[i].picUrl}"></th>
+//         <td>${gear[i].name}</td>
+//         <td>${gear[i].usedFor}</td>
+//         <td>${gear[i].price}</td>
+//       </tr>`;
+//       gearRows.append(newRow);
+//     }
+// }
+const addItemToGearList = (gear) => {
+    console.log(gear);
+        let newRow = document.createElement("tr")
+        newRow.innerHTML = `<tr>
+        <th scope="row"><img class="img-thumbnail" src="${gear.picUrl}"></th>
+        <td>${gear.name}</td>
+        <td>${gear.usedFor}</td>
+        <td>${gear.price}</td>
+      </tr>`;
+      gearRows.append(newRow);
+    
+}
+
+// uncomment the function call below to run the API and populate the list of gear... It is currently a list of people because I am using a jsonPlaceHolder API
+// getGear();
+
+addGearButton.addEventListener("click", function(event){
+    event.preventDefault();
+    let gearURL = document.getElementById("gearURL");
+    let gearType = document.getElementById("gearType");
+    let gearPrice = document.getElementById("gearPrice");
+    let gearUsedFor = document.getElementById("gearUsedFor");
+
+    gearManager.addGear(gearURL.value, gearType.value, gearUsedFor.value, gearPrice.value);
+    addItemToGearList({
+        picUrl: gearURL.value,
+        name: gearType.value,
+        usedFor: gearUsedFor.value,
+        price: gearPrice.value
+    });
+
+    gearURL = '';
+    gearType = '';
+    gearPrice = '';
+    gearUsedFor = '';
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
