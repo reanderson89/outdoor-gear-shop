@@ -1,41 +1,38 @@
 class GearController {
-    constructor(currentId = 0, ){
-        this.currentId = currentId;
-        this.gear = [];
+    constructor(currentID = 0){
+        this.currentID = currentID;
+        this.gearArray = [];
     }
 
-    addGear(picUrl, name, usedFor, price){
+    addGear(url, name, use, price){
         let newGear = {
-            id: this.currentId++,
-            picUrl,
+            id: this.currentID++,
+            url,
             name,
-            usedFor,
+            use,
             price
         }
-        this.gear.push(newGear);
-        this.setLocalStorage()
+        
+        this.gearArray.push(newGear);
+        this.setLocalStorage();
     }
 
     setLocalStorage(){
-        let storeGear = JSON.stringify(this.gear);
+        let storeGear = JSON.stringify(this.gearArray);
         localStorage.setItem("gear", storeGear);
-        let currentId = JSON.stringify(this.currentId);
-        localStorage.setItem("currentId", currentId);
-
+        let currentID = JSON.stringify(this.currentID);
+        localStorage.setItem("currentID", currentID);
     }
 
     loadLocalStorage(){
         if(localStorage.getItem("gear")){
             let gearArrayJson = localStorage.getItem("gear");
-            console.log(gearArrayJson)
-            console.log(JSON.parse(gearArrayJson))
-            this.gear = JSON.parse(gearArrayJson);
+            this.gearArray = JSON.parse(gearArrayJson);
         }
-        if(localStorage.getItem("currentId")){
-            let currentIdString = localStorage.getItem("currentId");
-            this.currentId = Number(currentIdString);
+        if(localStorage.getItem("currentID")){
+            let currentIdString = localStorage.getItem("currentID");
+            this.currentID = JSON.parse(currentIdString);
         }
  
      }
 }
-
