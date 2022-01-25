@@ -39,24 +39,24 @@
       <div class="row mt-5 justify-content-center">
         <div class="col col-sm-5 bg-success bg-opacity-75">
           <div class="mb-3">
-            <label for="gearURL" class="form-label">Picture URL</label>
-            <input type="url" class="form-control" id="gearURL" placeholder="URL">
+            <label for="gearURL" class="form-label">Name</label>
+            <input type="url" class="form-control" id="gearURL" placeholder="John Smith">
           </div>
           <div class="mb-3">
-            <label for="gearType" class="form-label">What is it?</label>
-            <input type="text" class="form-control" id="gearType" placeholder="Tent, boots, flashlight, etc...">
+            <label for="gearType" class="form-label">Age</label>
+            <input type="text" class="form-control" id="gearType" placeholder="In years">
           </div>
           <div class="mb-3">
-            <label for="gearPrice" class="form-label">Price</label>
-            <input type="text" class="form-control" id="gearPrice" placeholder="Don't use the $ symbol">
+            <label for="gearPrice" class="form-label">Height</label>
+            <input type="text" class="form-control" id="gearPrice" placeholder="Height in inches, no symbols">
           </div>
           <div class="mb-3">
-            <label for="gearUsedFor" class="form-label">What is it used for?</label>
-            <textarea class="form-control" type="text" id="gearUsedFor" rows="3"></textarea>
+            <label for="gearUsedFor" class="form-label">Weight</label>
+            <input class="form-control" type="text" id="gearUsedFor" placeholder="In pounds"></input>
           </div>
         </div>
         <div class="col-12 col-sm-2 align-self-center">
-          <button class="btn btn-large btn-success" type="submit" id="addGearButton">Add Gear</button>
+          <button class="btn btn-large btn-success" type="submit" id="addGearButton">Add Athlete</button>
         </div>
       </div>
       <!-- table of gear -->
@@ -65,10 +65,10 @@
           <table class="table bg-light table-hover">
             <thead>
               <tr>
-                <th scope="col">Picture</th>
                 <th scope="col">Name</th>
-                <th scope="col">Used For</th>
-                <th scope="col">Price</th>
+                <th scope="col">Age</th>
+                <th scope="col">Height</th>
+                <th scope="col">Weight</th>
               </tr>
             </thead>
             <tbody id="gearRows">
