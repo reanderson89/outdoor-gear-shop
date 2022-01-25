@@ -4,17 +4,25 @@ class GearController {
         this.gearArray = [];
     }
 
-    addGear(url, name, use, price){
-        let newGear = {
-            id: this.currentID++,
-            url,
+    addGear(name, weight, height, age){
+        let newAthlete = {
             name,
-            use,
-            price
+            weight,
+            height,
+            age
         }
         
-        this.gearArray.push(newGear);
-        this.setLocalStorage();
+        fetch("https://trakfyt-api.herokuapp.com/api/athlete", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+              // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: JSON.stringify(newAthlete) // body data type must match "Content-Type" header
+          }).then(response => {
+              console.log(response)
+              this.loadLocalStorage();
+            })
     }
 
     setLocalStorage(){
@@ -25,14 +33,12 @@ class GearController {
     }
 
     loadLocalStorage(){
-        if(localStorage.getItem("gear")){
-            let gearArrayJson = localStorage.getItem("gear");
-            this.gearArray = JSON.parse(gearArrayJson);
-        }
-        if(localStorage.getItem("currentID")){
-            let currentIdString = localStorage.getItem("currentID");
-            this.currentID = JSON.parse(currentIdString);
-        }
- 
+       fetch("https://trakfyt-api.herokuapp.com/api/athlete")
+       .then(response => response.json())
+       .then(data => {
+        this.gearArray = data;   
+        console.log(data)
+        renderListFromLocal();
+    })
      }
 }
